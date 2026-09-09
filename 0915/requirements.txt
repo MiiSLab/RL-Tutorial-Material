@@ -1,0 +1,6 @@
+swig
+gymnasium[atari,box2d]
+ale-py
+numpy
+matplotlib
+tensorboard

@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+*.pyo
+
+# Training artifacts
+runs/
+weights/
+*.pt
+*.pth
