@@ -4,3 +4,4 @@ ale-py
 numpy
 matplotlib
 tensorboard
+torch
