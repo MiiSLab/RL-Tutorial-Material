@@ -54,11 +54,7 @@ class ReplayBuffer:
 
 def select_action(state, policy_net, n_actions, epsilon):
     # TODO: Please complete the missing code for the epsilon-greedy action selection.
-    if random.random() < epsilon:
-        return random.randrange(n_actions)
-    with torch.no_grad():
-        state_t = torch.as_tensor(state, dtype=torch.float32, device=device).unsqueeze(0)
-        return policy_net(state_t).argmax(dim=1).item()
+    
 
 
 def optimize_model(policy_net, target_net, optimizer, buffer, batch_size, gamma):
@@ -76,9 +72,7 @@ def optimize_model(policy_net, target_net, optimizer, buffer, batch_size, gamma)
     q_values = policy_net(states).gather(1, actions).squeeze(1)
 
     # TODO: Please complete the missing code for the target Q-value computation and loss calculation.
-    with torch.no_grad():
-        next_q_values = target_net(next_states).max(dim=1)[0]
-        target = rewards + gamma * next_q_values * (1 - dones)
+    
 
     loss = nn.functional.smooth_l1_loss(q_values, target)
 

@@ -79,10 +79,9 @@ def train(
             action = select_action(q_table, state, epsilon, env.n_actions)
             next_state, reward, terminated, truncated, info = env.step(action)
 
-            best_next_value = np.max(q_table[next_state])
-            td_target = reward + gamma * best_next_value * (0.0 if terminated else 1.0)
-            q_table[state][action] += alpha * (td_target - q_table[state][action])
-
+            # TODO: Please complete the missing code for the Q-learning update step.
+            
+            
             state = next_state
 
         scores.append(info["score"])
