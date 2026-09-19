@@ -7,3 +7,4 @@ runs/
 weights/
 *.pt
 *.pth
+*.png

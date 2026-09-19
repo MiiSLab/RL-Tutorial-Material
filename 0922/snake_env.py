@@ -96,6 +96,17 @@ class SnakeEnv:
             int(food_up), int(food_down), int(food_left), int(food_right),
         )
 
+    def get_image_obs(self):
+        # Channel-encoded grid instead of rendered pixels: 0=body, 1=head, 2=food.
+        # A single frame is a full Markov state here (unlike Pong), since the
+        # snake's own body already encodes its recent trajectory.
+        img = np.zeros((3, self.height, self.width), dtype=np.float32)
+        for i, (x, y) in enumerate(self.snake):
+            img[1 if i == 0 else 0, y, x] = 1.0
+        fx, fy = self.food
+        img[2, fy, fx] = 1.0
+        return img
+
     def step(self, action):
         idx = CLOCKWISE.index(self.direction)
         if action == STRAIGHT:
