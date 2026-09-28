@@ -103,6 +103,7 @@ class ActorCritic(nn.Module):
         self.critic = mlp(state_dim, 1)
 
     def forward(self, x):
+        # TODO: Implement the forward pass to return a Normal distribution
         mean = self.actor_mean(x)
         dist = Normal(mean, self.log_std.exp().expand_as(mean))
         value = self.critic(x).squeeze(-1)
@@ -233,7 +234,8 @@ def train(
                 idx = indices[start:start + minibatch_size]
 
                 dist, values_pred = net(states_t[idx])
-                # Sum over action dimensions: log p(motor, steering) = log p(motor) + log p(steering)
+
+                # TODO: Implement the PPO loss
                 new_log_probs = dist.log_prob(actions_t[idx]).sum(-1)
                 entropy = dist.entropy().sum(-1).mean()
 
