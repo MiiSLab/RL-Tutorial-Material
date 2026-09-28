@@ -8,6 +8,7 @@ weights/
 *.pt
 *.pth
 *.png
+*.mp4
 
 # Car textures are real assets, not generated plots
 !RL-AutonomousCarEnv/models/**/*.png
