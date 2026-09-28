@@ -40,10 +40,7 @@ def compute_gae(rewards, values, next_values, terminateds, episode_ends, gamma, 
     gae = 0.0
 
     # TODO: Implement the computation of advantages using Generalized Advantage Estimation (GAE)
-    for t in reversed(range(len(rewards))):
-        delta = rewards[t] + gamma * next_values[t] * (1.0 - terminateds[t]) - values[t]
-        gae = delta + gamma * gae_lambda * (1.0 - episode_ends[t]) * gae
-        advantages[t] = gae
+
         
     returns = advantages + np.array(values, dtype=np.float32)
     return advantages, returns
@@ -162,13 +159,8 @@ def train(
                 new_log_probs = dist.log_prob(actions_t[idx])
                 entropy = dist.entropy().mean()
 
-                # TODO: Implement the PPO loss
-                ratio = torch.exp(new_log_probs - old_log_probs_t[idx])
-                surr1 = ratio * advantages_t[idx]
-                surr2 = torch.clamp(ratio, 1 - clip_eps, 1 + clip_eps) * advantages_t[idx]
-                policy_loss = -torch.min(surr1, surr2).mean()
-
-                value_loss = nn.functional.mse_loss(values_pred, returns_t[idx])
+                # TODO: Implement the PPO loss                
+                
 
                 loss = policy_loss + value_coef * value_loss - entropy_coef * entropy
 

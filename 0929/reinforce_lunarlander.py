@@ -46,20 +46,17 @@ def compute_weights(rewards, gamma):
     if not USE_REWARD_TO_GO_AND_BASELINE:        
         # Sum of rewards (vanilla REINFORCE)
         # TODO: Implement the computation of weights for the vanilla REINFORCE algorithm
-        return np.full(len(rewards), sum(rewards), dtype=np.float32)
+        return 
 
     returns = np.zeros(len(rewards), dtype=np.float32)
     running = 0.0
 
     # Reward-to-go: G_t = r_t + gamma * r_{t+1} + gamma^2 * r_{t+2} + ...
     # TODO: Implement the computation of returns using the rewards and discount factor gamma.    
-    for t in reversed(range(len(rewards))):
-        running = rewards[t] + gamma * running
-        returns[t] = running
-
+    
     # Baseline
     # TODO: Implement the computation of the baseline
-    return (returns - returns.mean()) / (returns.std() + 1e-8)
+    return
 
 
 def moving_average(values, window=20):
@@ -118,8 +115,7 @@ def train(
             timesteps_done += 1
 
         # TODO: Implement the computation of loss
-        weights = torch.as_tensor(compute_weights(rewards, gamma), dtype=torch.float32, device=device)
-        loss = -(torch.stack(log_probs) * weights).sum()
+        
 
         optimizer.zero_grad()
         loss.backward()
